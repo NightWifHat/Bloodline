@@ -724,6 +724,7 @@ ul { list-style: none; }
   position: relative;
   overflow: hidden;
   box-shadow: 0 40px 80px rgba(0,0,0,0.6), 0 0 0 1px rgba(200,16,46,0.15);
+  background: url('malcolm.jpg') center top / cover no-repeat;
 }
 .artist-solo-img::after {
   content: '';
