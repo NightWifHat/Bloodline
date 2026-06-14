@@ -3,7 +3,31 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Content Security Policy: lock down what the page is allowed to load.
+       Scripts/styles are same-origin only (no 'unsafe-inline'); fonts come
+       from Google Fonts; CSS-embedded SVG/data URIs are allowed for images. -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; form-action 'self'; object-src 'none'; img-src 'self' data:; style-src 'self' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; script-src 'self'; connect-src 'self'; upgrade-insecure-requests" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+
   <title>Bloodline Inkwear — Thoroughbred Threads</title>
+  <meta name="description" content="Bloodline Inkwear — premium streetwear born from real tattoo flash. Hand-drawn, hand-inked designs by Malcolm Hilton on heavy-weight tees, hoodies and outerwear. Wear the art." />
+  <meta name="theme-color" content="#c8102e" />
+  <link rel="canonical" href="https://nightwifhat.github.io/Bloodline/" />
+  <link rel="icon" type="image/png" href="logo.png" />
+  <link rel="apple-touch-icon" href="logo.png" />
+
+  <!-- Open Graph / social sharing -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Bloodline Inkwear — Thoroughbred Threads" />
+  <meta property="og:description" content="Where tattoo culture meets premium streetwear. Every piece tells a story written in skin." />
+  <meta property="og:image" content="logo.png" />
+  <meta property="og:url" content="https://nightwifhat.github.io/Bloodline/" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Bloodline Inkwear — Thoroughbred Threads" />
+  <meta name="twitter:description" content="Where tattoo culture meets premium streetwear. Every piece tells a story written in skin." />
+  <meta name="twitter:image" content="logo.png" />
+
   <link rel="stylesheet" href="style.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -30,7 +54,7 @@
         <a href="#" class="nav-icon" aria-label="Cart">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
         </a>
-        <button class="hamburger" id="hamburger" aria-label="Menu">
+        <button class="hamburger" id="hamburger" aria-label="Menu" aria-expanded="false" aria-controls="mobileMenu">
           <span></span><span></span><span></span>
         </button>
       </div>
@@ -233,7 +257,7 @@
           <h3>Malcolm Hilton</h3>
           <p class="artist-solo-style">Founder &amp; Lead Artist</p>
           <p class="artist-solo-bio">Malcolm Hilton is the creative force behind every Bloodline design. Malcolm has spent years perfecting the kind of bold, timeless artwork that earns its place on skin — and now, on the clothes you wear every day. Every thread in the Bloodline collection carries his hand.</p>
-          <a href="#" class="btn btn-primary" style="margin-top:28px;">View His Flash</a>
+          <a href="#" class="btn btn-primary artist-cta">View His Flash</a>
         </div>
       </div>
     </div>
@@ -248,8 +272,8 @@
       </div>
       <h2>Join the Bloodline</h2>
       <p>First access to new drops, artist collabs, and exclusive offers — delivered straight to your inbox.</p>
-      <form class="newsletter-form" onsubmit="handleNewsletter(event)">
-        <input type="email" placeholder="Your email address" required />
+      <form class="newsletter-form" id="newsletterForm" novalidate>
+        <input type="email" name="email" placeholder="Your email address" aria-label="Your email address" autocomplete="email" required />
         <button type="submit" class="btn btn-primary">Subscribe</button>
       </form>
       <p class="newsletter-fine">No spam. Just ink. Unsubscribe anytime.</p>
@@ -293,13 +317,13 @@
             </div>
           </div>
         </div>
-        <form class="contact-form" onsubmit="handleContact(event)">
+        <form class="contact-form" id="contactForm" novalidate>
           <div class="form-row">
-            <input type="text" placeholder="Your Name" required />
-            <input type="email" placeholder="Your Email" required />
+            <input type="text" name="name" placeholder="Your Name" aria-label="Your Name" autocomplete="name" required />
+            <input type="email" name="email" placeholder="Your Email" aria-label="Your Email" autocomplete="email" required />
           </div>
-          <input type="text" placeholder="Subject" />
-          <textarea placeholder="Your message..." rows="5" required></textarea>
+          <input type="text" name="subject" placeholder="Subject" aria-label="Subject" />
+          <textarea name="message" placeholder="Your message..." aria-label="Your message" rows="5" required></textarea>
           <button type="submit" class="btn btn-primary">Send Message</button>
         </form>
       </div>

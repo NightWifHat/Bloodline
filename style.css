@@ -749,6 +749,7 @@ ul { list-style: none; }
   color: var(--red);
   margin-bottom: 28px !important;
 }
+.artist-cta { margin-top: 28px; }
 .artist-solo-bio {
   color: var(--off-white);
   font-size: 1rem;
@@ -1057,4 +1058,17 @@ ul { list-style: none; }
 @media (max-width: 480px) {
   .artists-grid { grid-template-columns: 1fr; }
   .section-title { font-size: 1.8rem; }
+}
+
+/* ================================================================
+   REDUCED MOTION — respect users who prefer less animation
+   ================================================================ */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+  [data-aos] { opacity: 1; transform: none; }
 }

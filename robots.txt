@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://nightwifhat.github.io/Bloodline/sitemap.xml

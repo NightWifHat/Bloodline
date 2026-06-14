@@ -4,30 +4,32 @@
 
 /* ── Navbar scroll effect ── */
 const navbar = document.getElementById('navbar');
-window.addEventListener('scroll', () => {
-  if (window.scrollY > 40) {
-    navbar.classList.add('scrolled');
-  } else {
-    navbar.classList.remove('scrolled');
-  }
-}, { passive: true });
+if (navbar) {
+  window.addEventListener('scroll', () => {
+    navbar.classList.toggle('scrolled', window.scrollY > 40);
+  }, { passive: true });
+}
 
 /* ── Mobile menu ── */
 const hamburger = document.getElementById('hamburger');
 const mobileMenu = document.getElementById('mobileMenu');
 
-hamburger.addEventListener('click', () => {
-  hamburger.classList.toggle('open');
-  mobileMenu.classList.toggle('open');
-});
+if (hamburger && mobileMenu) {
+  const setMenu = (open) => {
+    hamburger.classList.toggle('open', open);
+    mobileMenu.classList.toggle('open', open);
+    hamburger.setAttribute('aria-expanded', String(open));
+  };
 
-// Close on link click
-mobileMenu.querySelectorAll('a').forEach(link => {
-  link.addEventListener('click', () => {
-    hamburger.classList.remove('open');
-    mobileMenu.classList.remove('open');
+  hamburger.addEventListener('click', () => {
+    setMenu(!mobileMenu.classList.contains('open'));
   });
-});
+
+  // Close on link click
+  mobileMenu.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => setMenu(false));
+  });
+}
 
 /* ── Smooth scroll for anchor links ── */
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -63,6 +65,7 @@ const toast = document.getElementById('toast');
 let toastTimer;
 
 function showToast(message) {
+  if (!toast) return;
   clearTimeout(toastTimer);
   toast.textContent = message;
   toast.classList.add('show');
@@ -70,18 +73,26 @@ function showToast(message) {
 }
 
 /* ── Newsletter form ── */
-function handleNewsletter(e) {
-  e.preventDefault();
-  const input = e.target.querySelector('input[type="email"]');
-  showToast('Welcome to the Bloodline. Check your inbox.');
-  input.value = '';
+const newsletterForm = document.getElementById('newsletterForm');
+if (newsletterForm) {
+  newsletterForm.addEventListener('submit', e => {
+    e.preventDefault();
+    // Forms are not wired to a backend yet — validate client-side and confirm.
+    if (!newsletterForm.reportValidity()) return;
+    showToast('Welcome to the Bloodline. Check your inbox.');
+    newsletterForm.reset();
+  });
 }
 
 /* ── Contact form ── */
-function handleContact(e) {
-  e.preventDefault();
-  showToast('Message sent. We\'ll be in touch soon.');
-  e.target.reset();
+const contactForm = document.getElementById('contactForm');
+if (contactForm) {
+  contactForm.addEventListener('submit', e => {
+    e.preventDefault();
+    if (!contactForm.reportValidity()) return;
+    showToast('Message sent. We\'ll be in touch soon.');
+    contactForm.reset();
+  });
 }
 
 /* ── Parallax on hero ── */
